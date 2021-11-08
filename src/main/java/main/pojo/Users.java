@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import main.enums.Role;
 
 @Entity
 @Table(name="Users")
@@ -27,7 +28,7 @@ public class Users {
 	@Column(name="PASSWORD")
 	private String password;
 
-	public Long getId() {
+	public Long getId() {	
 		return id;
 	}
 
@@ -65,6 +66,6 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	}	
 
 }
