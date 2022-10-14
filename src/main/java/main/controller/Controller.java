@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import main.jwtutil.JwtUtil;
+import main.pojo.AuthenticationRequest;
+import main.pojo.AuthenticationResponse;
 import main.pojo.Story;
 import main.pojo.Users;
 import main.service.InfoService;
+import main.service.MyUserDetailsService;
 import main.service.StoryMgmtService;
 import main.service.UserMgmtService;
 
@@ -35,11 +43,32 @@ public class Controller {
 	private StoryMgmtService storyMgmtService;
 	@Autowired
 	private UserMgmtService userMgmtService;
+	@Autowired
+	private AuthenticationManager authManager;
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+	@Autowired
+	private JwtUtil jwtUtil;
 
 	@GetMapping(value = "hello")
 	public String hello() {
 		return "Hello WOrld";
 	}
+	
+	@PostMapping("/authenticate")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest) throws Exception{
+		try {
+			authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));		
+		}catch (BadCredentialsException e) {
+			// TODO: handle exception
+			throw new Exception("incorrect credentials supplied ", e);
+		}
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
+		final String jwtToken = jwtUtil.generateToken(userDetails);
+		logger.info("returning jwt token");
+		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+	}
+	
 
 	@GetMapping(value = "users")
 	public List<Users> getAllUsers() {
