@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import main.pojo.LoginUser;
+
 import main.pojo.Story;
 import main.pojo.Users;
 import main.service.InfoService;
@@ -35,6 +35,11 @@ public class Controller {
 	private StoryMgmtService storyMgmtService;
 	@Autowired
 	private UserMgmtService userMgmtService;
+
+	@GetMapping(value = "hello")
+	public String hello() {
+		return "Hello WOrld";
+	}
 
 	@GetMapping(value = "users")
 	public List<Users> getAllUsers() {
@@ -71,14 +76,14 @@ public class Controller {
 		return new ResponseEntity<>(httpStatus);
 	}
 
-	@PutMapping(value = "user/login")
-	public ResponseEntity loginUser(@RequestBody LoginUser user) {
-		logger.info("entered loginUser");
-		HttpStatus httpStatus = HttpStatus.OK;
-		infoService.loginUser(user);
-		logger.info("exited loginUser");
-		return new ResponseEntity<>(httpStatus);
-	}
+//	@PutMapping(value = "user/login")
+//	public ResponseEntity loginUser(@RequestBody LoginUser user) {
+//		logger.info("entered loginUser");
+//		HttpStatus httpStatus = HttpStatus.OK;
+//		infoService.loginUser(user);
+//		logger.info("exited loginUser");
+//		return new ResponseEntity<>(httpStatus);
+//	}
 
 	@PostMapping(value = "story")
 	public ResponseEntity createNewStory(@RequestBody Story story) {
@@ -123,4 +128,13 @@ public class Controller {
 		logger.info("exited getStoriesReportedByUser");
 		return storyList;
 	}
+
+	@GetMapping(value = "stories")
+	public List<Story> getAllStories() {
+		logger.info("entered getAllStories");
+		List<Story> storyList = infoService.getAllStories();
+		logger.info("exited getAllStories");
+		return storyList;
+	}
+
 }

@@ -7,17 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import main.enums.Role;
-
 @Entity
 @Table(name="Users")
-
 public class Users {
-
 	@Id
 	@Column(name="ID")
-//	@SequenceGenerator(name="seq", initialValue=4, allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="FIRST_NAME")
 	private String firstName;
@@ -31,7 +25,6 @@ public class Users {
 	public Long getId() {	
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
