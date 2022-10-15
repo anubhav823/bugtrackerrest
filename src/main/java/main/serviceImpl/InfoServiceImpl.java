@@ -1,6 +1,7 @@
 package main.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,14 @@ public class InfoServiceImpl implements InfoService {
 		List<Story> storyList = storyInfoRepository.findAll();
 		logger.info("exited getAllUsers");
 		return storyList;
+	}
+
+	@Override
+	public Optional<Users> findByEmail(String email) {
+		logger.info("entered getAllUsers");
+		Optional<Users> user = userInfoRepository.findByEmail(email);
+		logger.info("exited getAllUsers");
+		return user;
 	}
 
 }
