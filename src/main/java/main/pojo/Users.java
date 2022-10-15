@@ -8,23 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 public class Users {
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID")
 	private Long id;
-	@Column(name="FIRST_NAME")
+	@Column(name = "FIRST_NAME")
 	private String firstName;
-	@Column(name="LAST_NAME")
+	@Column(name = "LAST_NAME")
 	private String lastName;
-	@Column(name="EMAIL")
+	@Column(name = "EMAIL")
 	private String email;
-	@Column(name="PASSWORD")
+	@Column(name = "PASSWORD")
 	private String password;
 
-	public Long getId() {	
+	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -59,6 +60,6 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
 
 }

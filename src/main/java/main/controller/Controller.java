@@ -54,12 +54,14 @@ public class Controller {
 	public String hello() {
 		return "Hello WOrld";
 	}
-	
+
 	@PostMapping("/authenticate")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest) throws Exception{
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest)
+			throws Exception {
 		try {
-			authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));		
-		}catch (BadCredentialsException e) {
+			authManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+		} catch (BadCredentialsException e) {
 			throw new Exception("incorrect credentials supplied ", e);
 		}
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
@@ -67,7 +69,6 @@ public class Controller {
 		logger.info("returning jwt token");
 		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
 	}
-	
 
 	@GetMapping(value = "users")
 	public List<Users> getAllUsers() {
