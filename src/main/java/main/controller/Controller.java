@@ -32,7 +32,6 @@ import main.service.StoryMgmtService;
 import main.service.UserMgmtService;
 
 @RestController
-@RequestMapping(value = "/")
 @CrossOrigin(origins = "http://localhost:3000")
 public class Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Controller.class);
@@ -49,8 +48,11 @@ public class Controller {
 	private MyUserDetailsService userDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
-
-	@GetMapping(value = "hello")
+	@GetMapping(value = "/")
+	public String check() {
+		return "Check WOrld";
+	}
+	@GetMapping(value = "/hello")
 	public String hello() {
 		return "Hello WOrld";
 	}

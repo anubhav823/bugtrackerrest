@@ -2,10 +2,10 @@ package main.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import main.enums.Role;
 
 @Entity
 @Table(name = "Users")
@@ -21,6 +21,10 @@ public class Users {
 	private String email;
 	@Column(name = "PASSWORD")
 	private String password;
+	@Column(name = "isActive")
+	private boolean isActive;
+	@Column(name = "ROLE")
+	private Role role;
 
 	public Long getId() {
 		return id;
@@ -60,6 +64,22 @@ public class Users {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
