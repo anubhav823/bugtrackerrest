@@ -60,7 +60,6 @@ public class Controller {
 		try {
 			authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));		
 		}catch (BadCredentialsException e) {
-			// TODO: handle exception
 			throw new Exception("incorrect credentials supplied ", e);
 		}
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
