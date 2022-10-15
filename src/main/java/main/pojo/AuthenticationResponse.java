@@ -14,5 +14,5 @@ public class AuthenticationResponse {
 	public String getJwtToken() {
 		return jwtToken;
 	}
-	
+
 }
