@@ -42,12 +42,7 @@ public class Controller {
 	private StoryMgmtService storyMgmtService;
 	@Autowired
 	private UserMgmtService userMgmtService;
-	@Autowired
-	private AuthenticationManager authManager;
-	@Autowired
-	private MyUserDetailsService userDetailsService;
-	@Autowired
-	private JwtUtil jwtUtil;
+	
 	@GetMapping(value = "/")
 	public String check() {
 		return "Check World";
@@ -57,20 +52,20 @@ public class Controller {
 		return "Hello WOrld";
 	}
 
-	@PostMapping("/authenticate")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest)
-			throws Exception {
-		try {
-			authManager.authenticate(
-					new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
-		} catch (BadCredentialsException e) {
-			throw new Exception("incorrect credentials supplied ", e);
-		}
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
-		final String jwtToken = jwtUtil.generateToken(userDetails);
-		logger.info("returning jwt token");
-		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
-	}
+//	@PostMapping("/authenticate")
+//	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest)
+//			throws Exception {
+//		try {
+//			authManager.authenticate(
+//					new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+//		} catch (BadCredentialsException e) {
+//			throw new Exception("incorrect credentials supplied ", e);
+//		}
+//		final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
+//		final String jwtToken = jwtUtil.generateToken(userDetails);
+//		logger.info("returning jwt token");
+//		return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+//	}
 
 	@GetMapping(value = "users")
 	public List<Users> getAllUsers() {
@@ -80,14 +75,14 @@ public class Controller {
 		return usersList;
 	}
 
-	@PostMapping(value = "user")
-	public ResponseEntity registerNewUser(@RequestBody Users user) {
-		logger.info("entered registerNewUser");
-		HttpStatus httpStatus = HttpStatus.OK;
-		userMgmtService.registerNewUser(user);
-		logger.info("exited registerNewUser");
-		return new ResponseEntity<>(httpStatus);
-	}
+//	@PostMapping(value = "user")
+//	public ResponseEntity registerNewUser(@RequestBody Users user) {
+//		logger.info("entered registerNewUser");
+//		HttpStatus httpStatus = HttpStatus.OK;
+//		userMgmtService.registerNewUser(user);
+//		logger.info("exited registerNewUser");
+//		return new ResponseEntity<>(httpStatus);
+//	}
 
 	@PutMapping(value = "user/{id}")
 	public ResponseEntity updateUserById(@PathVariable("id") Long id, @RequestBody Users user) {
