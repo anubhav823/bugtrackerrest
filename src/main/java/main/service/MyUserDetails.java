@@ -22,9 +22,7 @@ public class MyUserDetails implements UserDetails {
 		this.username = user.getEmail();
 		this.password = user.getPassword();
 		this.active = user.isActive();
-		this.grantedAuthorities = Arrays.stream(user.getRoles().split(", "))
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
+//		this.grantedAuthorities = user.getRole();
 	}
 
 	@Override

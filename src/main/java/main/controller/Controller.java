@@ -50,7 +50,7 @@ public class Controller {
 	private JwtUtil jwtUtil;
 	@GetMapping(value = "/")
 	public String check() {
-		return "Check WOrld";
+		return "Check World";
 	}
 	@GetMapping(value = "/hello")
 	public String hello() {
