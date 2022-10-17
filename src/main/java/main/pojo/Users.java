@@ -21,10 +21,8 @@ public class Users {
 	private String email;
 	@Column(name = "PASSWORD")
 	private String password;
-	@Column(name = "isActive")
-	private boolean isActive;
-	@Column(name = "ROLE")
-	private Role role;
+	@Column(name = "enabled")
+	private String enabled;
 
 	public Long getId() {
 		return id;
@@ -66,20 +64,12 @@ public class Users {
 		this.password = password;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public String getEnabled() {
+		return enabled;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 
 }
